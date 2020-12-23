@@ -32,4 +32,10 @@ test('gets manager\'s role', () => {
     const manager = new Manager('James', 1, 5555555555);
 
     expect(manager.getRole()).toEqual(expect.stringContaining(manager.role));
-})
+});
+
+test('gets manager\'s office number', () => {
+    const manager = new Manager('James', 1, 5555555555);
+
+    expect(manager.getOfficeNumber()).toEqual(expect.stringContaining(`${manager.officeNumber}`));
+});
