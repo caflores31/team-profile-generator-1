@@ -4,7 +4,7 @@ const Engineer = require('../lib/Engineer');
 const Intern = require('../lib/Intern');
 
 const formatName = name => {
-    return name.toLowerCase().charAt(0).toUpperCase() + name.slice(1);
+    return name.charAt(0).toUpperCase() + name.slice(1).toLowerCase();
 };
 
 const addEmployee = employeeInfo => {
@@ -65,13 +65,16 @@ const generatePage = templateData => {
         <title>My Team Profile</title>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.1/css/bulma.min.css" />
     </head>
-
     <body>
-        <header>
-            My Team
-        </header>
-        <main>
-            <div class="columns">
+        <section class="hero is-primary is-bold">
+            <div class="hero-body">
+                <div class="container">
+                    <h1 class="title">My Team</h1>
+                </div>
+            </div>
+        </section>
+        <main class="m-6">
+            <div class="columns is-flex is-flex-wrap-wrap is-flex-direction-row is-justify-content-center">
                 ${addEmployee(templateData)}
             </div>
         </main>
