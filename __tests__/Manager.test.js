@@ -11,7 +11,6 @@ test('creates a manager object', () => {
     expectToBe(manager.role, 'Manager');
     expectNum(manager.officeNumber);
     expectToBe(manager.icon, 'fas fa-mug-hot');
-
 });
 
 test('gets manager\'s name', () => {
