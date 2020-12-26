@@ -3,18 +3,20 @@ const Manager = require('../lib/Manager');
 const Engineer = require('../lib/Engineer');
 const Intern = require('../lib/Intern');
 
+// helper function to format name input
 const formatName = name => {
     return name.charAt(0).toUpperCase() + name.slice(1).toLowerCase();
 };
 
 const addEmployee = employeeInfo => {
 
+    // initiates html string for employee cards
     let allCards = '';
 
     employeeInfo.forEach(employee => {    
         
         const { firstName, lastName, id, role } = employee;
-        let newEmployee = 0;
+        let newEmployee = '';
         let extraInfo = '';
 
         switch (role) {
@@ -29,8 +31,12 @@ const addEmployee = employeeInfo => {
             case 'Intern':
                 newEmployee = new Intern(formatName(firstName), formatName(lastName), id, employee.school);
                 extraInfo = newEmployee.getSchool();
+                break;
+            default:
+                newEmployee = new Employee(formatName(firstName), formatName(lastName), id);
         };
 
+        // concatenates all employee cards
         allCards += `
 <div class="column is-one-quarter-desktop">
     <div class="card">

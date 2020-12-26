@@ -1,8 +1,22 @@
 const inquirer = require('inquirer');
 const fs = require('fs');
 const generatePage = require('./src/page-template.js')
+const allEmployees = [];
 
 const questions = [
+    {
+        type: 'list',
+        name: 'role',
+        message: 'What is the employee\'s role?',
+        choices: // function to allow only one manager to be created
+            () => {
+            if (allEmployees.some(employee => employee.role === 'Manager')) {
+                return ['Engineer', 'Intern']    
+            } else {
+                return ['Manager', 'Engineer', 'Intern']
+            }
+        }
+    },
     {
         type: 'input',
         name: 'firstName',
@@ -41,12 +55,6 @@ const questions = [
                 return false;
             }
         }
-    },
-    {
-        type: 'list',
-        name: 'role',
-        message: 'What is the employee\'s role?',
-        choices: ['Manager', 'Engineer', 'Intern']
     },
     {
         type: 'input',
@@ -114,26 +122,21 @@ const questions = [
         message: 'Would you like to add another employee?',
         default: true
     }
-];
+]
 
-const promptUser = (employeeData) => {
-
-    // creates array for all employee data
-    if (!employeeData) {
-        employeeData = [];
-    }
+const promptUser = () => {
 
     return inquirer.prompt(questions)
     .then(userResponse => {
 
         // adds to employee data array
-        employeeData.push(userResponse);
+        allEmployees.push(userResponse);
 
         // adds another employee based on user selection
         if (userResponse.addEmployee) {
-            return promptUser(employeeData);
+            return promptUser();
         } else {
-            return employeeData;
+            return allEmployees;
         };
     });
 };
