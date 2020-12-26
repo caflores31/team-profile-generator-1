@@ -1,6 +1,7 @@
 const inquirer = require('inquirer');
 const fs = require('fs');
 const generatePage = require('./src/page-template.js')
+const formatName = require('./utils/helper');
 const allEmployees = [];
 
 const questions = [
@@ -20,7 +21,7 @@ const questions = [
     {
         type: 'input',
         name: 'firstName',
-        message: 'What is the employee\'s first name?',
+        message: ({ role }) => `What is the ${role.toLowerCase()}'s first name?`,
         validate: nameInput => {
             if (nameInput) {
                 return true;
@@ -33,7 +34,7 @@ const questions = [
     {
         type: 'input',
         name: 'lastName',
-        message: 'What is the employee\'s last name?',
+        message: ({ firstName }) => `What is ${formatName(firstName)}'s last name?`,
         validate: nameInput => {
             if (nameInput) {
                 return true;
@@ -46,7 +47,7 @@ const questions = [
     {
         type: 'input',
         name: 'id',
-        message: 'What is the employee\'s ID number?',
+        message: ({ firstName }) => `What is ${formatName(firstName)}'s ID number?`,
         validate: idInput => {
             if (!isNaN(parseInt(idInput))) {
                 return true;
@@ -59,7 +60,7 @@ const questions = [
     {
         type: 'input',
         name: 'officeNumber',
-        message: 'What is the manager\'s office number?',
+        message:  ({ firstName }) => `What is ${formatName(firstName)}'s office number?`,
         when: ({ role }) => {
             if (role === 'Manager') {
                 return true;
@@ -79,7 +80,7 @@ const questions = [
     {
         type: 'input',
         name: 'github',
-        message: 'What is the engineer\'s GitHub username?',
+        message: ({ firstName }) => `What is ${formatName(firstName)}'s GitHub userame?`,
         when: ({ role }) => {
             if (role === 'Engineer') {
                 return true;
@@ -99,7 +100,7 @@ const questions = [
     {
         type: 'input',
         name: 'school',
-        message: `What school does the intern go to?`,
+        message: ({ firstName }) => `What school does ${formatName(firstName)} go to?`,
         when: ({ role }) => {
             if (role === 'Intern') {
                 return true;

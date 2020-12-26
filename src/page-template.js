@@ -2,11 +2,7 @@ const Employee = require('../lib/Employee');
 const Manager = require('../lib/Manager');
 const Engineer = require('../lib/Engineer');
 const Intern = require('../lib/Intern');
-
-// helper function to format name input
-const formatName = name => {
-    return name.charAt(0).toUpperCase() + name.slice(1).toLowerCase();
-};
+const formatName = require('../utils/helper');
 
 const addEmployee = employeeInfo => {
 
