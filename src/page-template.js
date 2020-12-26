@@ -15,16 +15,20 @@ const addEmployee = employeeInfo => {
         
         const { firstName, lastName, id, role } = employee;
         let newEmployee = 0;
+        let extraInfo = '';
 
         switch (role) {
             case 'Manager':
                 newEmployee = new Manager(formatName(firstName), formatName(lastName), id, employee.officeNumber);
+                extraInfo = newEmployee.getOfficeNumber();
                 break;
             case 'Engineer': 
                 newEmployee = new Engineer(formatName(firstName), formatName(lastName), id, employee.github);
+                extraInfo = newEmployee.getGithub();
                 break;
             case 'Intern':
                 newEmployee = new Intern(formatName(firstName), formatName(lastName), id, employee.school);
+                extraInfo = newEmployee.getSchool();
         };
 
         allCards += `
@@ -42,7 +46,8 @@ const addEmployee = employeeInfo => {
             </div>
 
             <div class="content">
-                ${newEmployee.getEmail()}
+                <p>${newEmployee.getEmail()}<br />
+                ${extraInfo}</p>
             </div>
         </div>
     </div>
