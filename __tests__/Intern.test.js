@@ -1,4 +1,4 @@
-const Intern = require('../lib/Intern')
+const Intern = require('../lib/Intern');
 const { expectToBe, expectStr, expectNum } = require('../utils/expect');
 
 const intern = new Intern('John', 'Doe', 1, 'UCF');
